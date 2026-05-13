@@ -4,16 +4,22 @@ const taskSchema = new Schema({
     name:
     {
         type: String,
-        required: [true, "The username is required."],
+        required: [true, "The name is required."],
         minlength: 3,
         maxlength: 50,
     },
     description:
     {
         type: String,
-        required: [true, "The username is required."],
+        required: [true, "The description is required."],
         minlength: 3,
         maxlength: 300,
+    },
+    user:
+    {
+        type: Schema.Types.ObjectId,
+        required: [true, "A task must belong to a user."],
+        ref: "User",
     },
     state:
     {
@@ -32,12 +38,6 @@ const taskSchema = new Schema({
     finishedAt:
     {
         type: Date
-    },
-    user:
-    {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "A task must belong to a user."],
     },
 });
 
