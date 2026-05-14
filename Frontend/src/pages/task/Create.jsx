@@ -28,18 +28,20 @@ const Create = () => {
 
     return (
         <>
-            <h1>Create Task</h1>
-            <form onSubmit={submitHandler}>
-                <div>
-                    <label htmlFor="name">Name: </label>
-                    <input type="text" id="name" name="name" />
-                </div>
-                <div>
-                    <label htmlFor="description">Description: </label>
-                    <textarea id="description" name="description"></textarea>
-                </div>
-                <button type="submit">Create Task</button>
-            </form>
+            <div className="page-card">
+                <h1>Create Task</h1>
+                <form onSubmit={submitHandler}>
+                    <div>
+                        <label htmlFor="name">Name: </label>
+                        <input type="text" id="name" name="name" />
+                    </div>
+                    <div>
+                        <label htmlFor="description">Description: </label>
+                        <textarea id="description" name="description"></textarea>
+                    </div>
+                    <button type="submit">Create Task</button>
+                </form>
+            </div>
         </>
     );
 }

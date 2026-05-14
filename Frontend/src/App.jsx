@@ -22,9 +22,9 @@ const App = () =>
       }
   }, []);
 
-
+  // The css is completely vibe coded
   return (
-    <>
+    <main className="app-shell">
       <Routes>
         <Route path="/login" Component={Login}/>
         <Route path="/register" Component={Register}/>
@@ -32,7 +32,7 @@ const App = () =>
         <Route path="/tasks/edit/:id" Component={Edit}/>
         <Route path="/" Component={Home}/>
       </Routes>
-    </>
+    </main>
   );
 }
 

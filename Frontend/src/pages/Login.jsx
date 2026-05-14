@@ -37,7 +37,7 @@ const Login = () => {
 
     return (
         <>
-        <div>
+        <div className="page-card">
             <h2>Log in</h2>
             <div>
                 <label>Email: </label>
@@ -47,7 +47,7 @@ const Login = () => {
                 <label>Password: </label>
                 <input type="password" name="password" id="password" value={userData.password} onChange={onChangeHandler}/>
             </div>
-            <button onClick={loginHandler}>Login</button><br/>
+            <button onClick={loginHandler}>Login</button><br />
             <Link to="/register">Don't have an account? Register</Link>
         </div>
         </>

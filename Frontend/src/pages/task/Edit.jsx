@@ -38,7 +38,7 @@ const Edit = () =>
               name: res.data.data.task.name,
               description: res.data.data.task.description
           });
-          
+
         }).catch(err => {
             console.error(err);
         });
@@ -70,18 +70,20 @@ const Edit = () =>
 
     return (
         <>
-            <h1>Edit Task</h1>
-            <form onSubmit={submitHandler}>
-                <div>
-                    <label htmlFor="name">Name: </label>
-                    <input type="text" id="name" name="name" value={taskData.name} onChange={(e) => setTaskData({...taskData, name: e.target.value})} />
-                </div>
-                <div>
-                    <label htmlFor="description">Description: </label>
-                    <textarea id="description" name="description" value={taskData.description} onChange={(e) => setTaskData({...taskData, description: e.target.value})}></textarea>
-                </div>
-                <button type="submit">Edit Task</button>
-            </form>
+            <div className="page-card">
+                <h1>Edit Task</h1>
+                <form onSubmit={submitHandler}>
+                    <div>
+                        <label htmlFor="name">Name: </label>
+                        <input type="text" id="name" name="name" value={taskData.name} onChange={(e) => setTaskData({...taskData, name: e.target.value})} />
+                    </div>
+                    <div>
+                        <label htmlFor="description">Description: </label>
+                        <textarea id="description" name="description" value={taskData.description} onChange={(e) => setTaskData({...taskData, description: e.target.value})}></textarea>
+                    </div>
+                    <button type="submit">Edit Task</button>
+                </form>
+            </div>
         </>
     );
 }
