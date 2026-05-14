@@ -17,10 +17,12 @@ exports.signUp = async (req, res) =>
             }
             
         );
+        const token = createToken(newUser.id);
         res.status(201).json(
             {
                 message: "User created.",
                 data: { newUser },
+                token: token
             }
         );
     }
@@ -81,6 +83,32 @@ exports.signIn = async (req, res) =>
         res.status(400).json(
             {
                 message: "Log in failed.",
+                error: error,
+            }
+        );
+    }
+}
+
+exports.getCurrentUser = async (req, res) =>
+{
+    try
+    {
+        const user = await userModel.findById(req.user.id);
+        res.status(200).json(
+            {
+                message: "Fetched user.",
+                data:
+                {
+                    user
+                },
+            }
+        );
+    }
+    catch (error)
+    {
+        res.status(400).json(
+            {
+                message: "Request failed.",
                 error: error,
             }
         );

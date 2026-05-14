@@ -2,18 +2,19 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
-    const [userData, setUserData] = useState({email: "", password: ""});
+const Register = () => {
+    const [userData, setUserData] = useState({email: "", password: "", name: ""});
     const navigate = useNavigate();
 
-    const loginHandler = () => {
+    const registerHandler = () => {
         console.log(userData.email + " " + userData.password);
         axios.post(
-            "http://localhost:1337/users/signIn",
+            "http://localhost:1337/users/signUp",
             {
                 email: userData.email,
                 password: userData.password,
-                confirmPassword: userData.password
+                confirmPassword: userData.password,
+                name: userData.name
             }
         ).then(res =>
             {
@@ -24,10 +25,10 @@ const Login = () => {
         ).catch(er =>
             {
                 console.log(er)
-                alert("Login failed. Please check your credentials and try again.");
+                alert("Registration failed. Please check your details and try again.");
             }
         )
-        setUserData({email: "", password: ""});
+        setUserData({email: "", password: "", name: ""});
     }
 
     const onChangeHandler = ({target}) => {
@@ -38,20 +39,24 @@ const Login = () => {
     return (
         <>
         <div>
-            <h2>Log in</h2>
+            <h2>Register</h2>
             <div>
                 <label>Email: </label>
                 <input type="email" name="email" id="email" value={userData.email} onChange={onChangeHandler} />
             </div>
             <div>
+                <label>Name: </label>
+                <input type="text" name="name" id="name" value={userData.name} onChange={onChangeHandler} />
+            </div>
+            <div>
                 <label>Password: </label>
                 <input type="password" name="password" id="password" value={userData.password} onChange={onChangeHandler}/>
             </div>
-            <button onClick={loginHandler}>Login</button><br/>
-            <Link to="/register">Don't have an account? Register</Link>
+            <button onClick={registerHandler}>Register</button><br/>
+            <Link to="/login">Already have an account? Log in</Link>
         </div>
         </>
     )
 }
 
-export default Login
+export default Register
