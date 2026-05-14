@@ -133,7 +133,7 @@ exports.deleteTask = async (req, res) =>
     try
     {
         const taskToDelete = await taskModel.findById(req.params.id);
-        if (task.user != req.user.id)
+        if (taskToDelete.user != req.user.id)
         {
             res.status(400).json(
                 {
@@ -149,6 +149,7 @@ exports.deleteTask = async (req, res) =>
             {_id: taskToDelete.user},
             {$pull: {tasks: req.params.id}}
         )
+        console.log("hi");
         await taskModel.deleteOne(taskToDelete);
         res.status(204).json();
     }
