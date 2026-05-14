@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Create from "./pages/task/Create";
+import Edit from "./pages/task/Edit";
 
 const App = () =>
 {  
@@ -28,6 +29,7 @@ const App = () =>
         <Route path="/login" Component={Login}/>
         <Route path="/register" Component={Register}/>
         <Route path="/tasks/create" Component={Create}/>
+        <Route path="/tasks/edit/:id" Component={Edit}/>
         <Route path="/" Component={Home}/>
       </Routes>
     </>

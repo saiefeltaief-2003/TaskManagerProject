@@ -90,7 +90,7 @@ const Home = () => {
                                 <td>{task.name}</td>
                                 <td>{task.description}</td>
                                 <td>{new Date(task.createdAt).toLocaleDateString()}</td>
-                                <td><button>Edit</button></td>
+                                <td><button onClick={() => navigate(`/tasks/edit/${task._id}`)}>Edit</button></td>
                                 <td><button onClick={() => deleteHandler(task._id)}>Delete</button></td>
                             </tr>
                         ))}
