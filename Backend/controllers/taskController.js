@@ -5,8 +5,14 @@ exports.createTask = async (req, res) =>
 {
     try
     {
-        const { name, description, user } = req.body;
-        const newTask = await taskModel.create({name, description, user});
+        const { name, description } = req.body;
+        const user = req.user.id;
+        const newTask = await taskModel.create({
+            name: name,
+            description: description,
+            user: user,
+            state: "PENDING"
+        });
         await userModel.findOneAndUpdate(
             {_id: user},
             {$push: {tasks: newTask._id}}
@@ -86,7 +92,21 @@ exports.updateTask = async (req, res) =>
 {
     try
     {
-        const task = await taskModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        // const task = await taskModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        const task = await taskModel.findById(req.params.id);
+        if (task.user != req.user.id)
+        {
+            res.status(400).json(
+                {
+                    message: "Task does not belong to current user.",
+                    data:
+                    {
+                        task
+                    },
+                }
+            );
+        }
+        await taskModel.updateOne(task, req.body, {new: true})
         res.status(200).json(
             {
                 message: "Updated task.",
@@ -113,6 +133,18 @@ exports.deleteTask = async (req, res) =>
     try
     {
         const taskToDelete = await taskModel.findById(req.params.id);
+        if (task.user != req.user.id)
+        {
+            res.status(400).json(
+                {
+                    message: "Task does not belong to current user.",
+                    data:
+                    {
+                        task
+                    },
+                }
+            );
+        }
         await userModel.findOneAndUpdate(
             {_id: taskToDelete.user},
             {$pull: {tasks: req.params.id}}
@@ -131,11 +163,11 @@ exports.deleteTask = async (req, res) =>
     }
 }
 
-exports.getTasksByUser = async (req, res) =>
+exports.getTasksForUser = async (req, res) =>
 {
     try
     {
-        const tasks = await taskModel.find({user: req.params.user});
+        const tasks = await taskModel.find({user: req.user.id});
         res.status(200).json(
             {
                 message: "Fetched all tasks from user.",

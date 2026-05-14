@@ -31,14 +31,6 @@ const taskSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    startedAt:
-    {
-        type: Date
-    },
-    finishedAt:
-    {
-        type: Date
-    },
 });
 
 const Task = model("Task", taskSchema);

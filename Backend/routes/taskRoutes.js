@@ -1,9 +1,10 @@
-const { createTask, getAllTasks, getTaskById, updateTask, deleteTask, getTasksByUser } = require("../controllers/taskController");
+const { createTask, getAllTasks, getTaskById, updateTask, deleteTask, getTasksForUser } = require("../controllers/taskController");
+const { authenticateToken } = require("../middlewares/authGuard");
 
 const router = require("express").Router();
 
-router.route('/').post(createTask).get(getAllTasks);
-router.route('/:id').get(getTaskById).patch(updateTask).delete(deleteTask);
-router.get('/user/:user', getTasksByUser);
+router.route('/').post(authenticateToken, createTask).get(getAllTasks);
+router.route('/:id').get(getTaskById).patch(authenticateToken, updateTask).delete(authenticateToken, deleteTask);
+router.post('/user', authenticateToken, getTasksForUser);
 
 module.exports = router;
