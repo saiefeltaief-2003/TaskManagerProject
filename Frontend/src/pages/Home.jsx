@@ -73,7 +73,7 @@ const Home = () => {
                 <h1>Home Page</h1>
                 <h2>Welcome, {userData.name}!</h2>
                 <h3>Tasks:</h3>
-                <button>Add new task</button>
+                <button onClick={() => navigate("/tasks/create")}>Add new task</button>
                 <table>
                     <thead>
                         <tr>

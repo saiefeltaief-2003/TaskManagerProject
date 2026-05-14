@@ -4,6 +4,7 @@ import './App.css'
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import Create from "./pages/task/Create";
 
 const App = () =>
 {  
@@ -26,6 +27,7 @@ const App = () =>
       <Routes>
         <Route path="/login" Component={Login}/>
         <Route path="/register" Component={Register}/>
+        <Route path="/tasks/create" Component={Create}/>
         <Route path="/" Component={Home}/>
       </Routes>
     </>
